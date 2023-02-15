@@ -6,24 +6,34 @@
 <div th:replace="~{fragment :: head}"></div>
 </head>
 <body>
-<h1 class="text-center">LE NOSTRE PIZZE</h1>
+	<h1 class="text-center">LE NOSTRE PIZZE</h1>
+	<form action="pizzeria" method="get" class="mb-5">
+  		<input type="text" id="keyword" name="keyword" />
+  		<button type="submit">Cerca</button>
+	</form>
 
-	
-	<table th:if="${elencopizzeria.size>0}" class="table table-dark table-borderless">
+
+	<table th:if="${elencopizzeria.size>0}"
+		class="table table-dark table-borderless">
 		<thead>
-			<tr><th scope="col">#</th>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col"></th>
 				<th scope="col">PIZZE</th>
-				<th scope="col">PREZZO</th>
+				<th scope="col">PREZZO</th>	
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="pizza : ${elencopizzeria}">
-			<th th:text="${pizza.id}"></th>
-			<th th:text="${pizza.name}"></th>
-			<th th:text="${pizza.price} + ' EURO' "></th>
+				<th th:text="${pizza.id}"></th>
+				<th><a class="text-decoration-none text-danger"
+					th:text="VISUALIZZA" th:href="@{'pizzeria/'+ ${pizza.id}}"></a></th>
+				<th th:text="${pizza.name}"></th>
+				<th th:text="${pizza.price} + ' EURO' "></th>
+			 <tr/>
 		</tbody>
 	</table>
 
-<div th:replace="~{fragment :: script}"></div>
+	<div th:replace="~{fragment :: script}"></div>
 </body>
 </html>
