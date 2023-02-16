@@ -7,10 +7,15 @@ import org.corsojava.pizzeria.repository.PizzeriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/pizzeria")
@@ -32,11 +37,34 @@ public class PizzeriaController {
 		return "index";
 	}
 
-	@GetMapping("/{id}") 
+	@GetMapping("/{id}")
 	public String detail(@PathVariable("id") Integer id, Model model) {
 		Pizzeria pizzeria = pizzeriarep.getReferenceById(id);
 		model.addAttribute("detail", pizzeria);
 		return "detail";
+	}
+
+	@GetMapping("/create") 
+	public String create(Model model) {
+
+		Pizzeria p = new Pizzeria();
+		p.setName("Inserisci Nome Pizza");
+		model.addAttribute("pizzeria", p);
+		return "create";
+	}
+
+	@PostMapping("/create") 
+	public String store(@Valid @ModelAttribute("pizzeria") Pizzeria formPizzeria, BindingResult bindingResult,
+			Model model) {
+
+		if (bindingResult.hasErrors()) {
+			return "create";
+
+		}
+		pizzeriarep.save(formPizzeria);
+
+		return "redirect:/pizzeria";
+
 	}
 
 }
