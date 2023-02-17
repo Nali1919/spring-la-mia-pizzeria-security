@@ -66,5 +66,34 @@ public class PizzeriaController {
 		return "redirect:/pizzeria";
 
 	}
+	@GetMapping("/edit/{id}")		
+	public String edit(@PathVariable("id") Integer id, Model model) {		
+		Pizzeria pizza=pizzeriarep.getReferenceById(id);  
+		
+		model.addAttribute("pizza", pizza);
+		return "edit";
+	}
+	
+	@PostMapping("/edit/{id}")		
+	public String update(
+			@Valid @ModelAttribute Pizzeria formPizzeria,
+			BindingResult bindingResult,
+			Model model) {
+		
+		if (bindingResult.hasErrors())
+			return "edit";
+		
+		pizzeriarep.save(formPizzeria);
+		
+		return "redirect:/pizzeria";
+	}
+	
+	@PostMapping("/delete/{id}")
+	public String delete(@PathVariable("id") Integer id) {
+	 
+	   pizzeriarep.deleteById(id);
+	   
+	   return "redirect:/pizzeria";
+	}
 
 }

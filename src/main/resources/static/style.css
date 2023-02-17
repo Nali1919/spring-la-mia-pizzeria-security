@@ -3,3 +3,12 @@
 .verde {
 	color: green;
 }
+
+body {
+	background-image: url("https://www.buttalapasta.it/wp-content/uploads/2017/11/pizza-margherita.jpg");
+	background-position: center;
+	background-size: cover;
+}
+.img-detail{
+	width: 200px;
+}
