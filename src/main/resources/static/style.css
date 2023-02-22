@@ -8,7 +8,13 @@ body {
 	background-image: url("https://www.buttalapasta.it/wp-content/uploads/2017/11/pizza-margherita.jpg");
 	background-position: center;
 	background-size: cover;
+	background-color: rgba(0, 0, 0, 0);
 }
 .img-detail{
-	width: 200px;
+	width: 250px;
+	border-radius: 15px;
+	opacity: 0.5;
+}
+.aa{
+	width: 150px;
 }

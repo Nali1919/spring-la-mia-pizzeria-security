@@ -2,6 +2,7 @@ package org.corsojava.pizzeria.model;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat.Style;
+import java.util.List;
 
 import org.apache.el.lang.ELArithmetic.BigDecimalDelegate;
 
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -29,9 +31,21 @@ public class Pizzeria {
 	@NotNull(message = "il prezzo non può essere nullo")
 	private BigDecimal price;
 	private String photo;
+	
+	@OneToMany (mappedBy = "pizzeria")
+	private List<Discount> Discounts;
 
+	
 	public int getId() {
 		return id;
+	}
+
+	public List<Discount> getDiscounts() {
+		return Discounts;
+	}
+
+	public void setDiscounts(List<Discount> discounts) {
+		Discounts = discounts;
 	}
 
 	public void setId(int id) {
