@@ -61,6 +61,7 @@ public class DiscountController {
 		return "redirect:/pizzeria"; //genera un altro get
 		
 	}
+	
 	@GetMapping("/edit/{id}") //GESTISCE LE RICHIESTEDEL TIPO /discount/EDIT/ID
 	public String edit(@PathVariable("id") Integer id,Model model ) {
 		
@@ -83,8 +84,5 @@ public class DiscountController {
 		
 		return "redirect:/pizzeria";
 		
-	}
-	
-	
+	}	
 }
-

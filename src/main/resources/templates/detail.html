@@ -2,70 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Dettaglio Pizze</title>
+<title>Dettaglio</title>
 <div th:replace="~{fragment :: head}"></div>
-<link rel="stylesheet" th:href="@{/style.css}">
 </head>
-<style>
-body {
-	background-image:
-		url("https://static.cookist.it/wp-content/uploads/sites/21/2018/03/pizza-3000274-960-720.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 1000px;
-}
-</style>
-<body>
-	<div class="text-center mt-5">
-		<h2 th:text="'Nome: ' + ${detail.name}"></h2>
+<body
+	style="background-image: url('https://images.pexels.com/photos/3761662/pexels-photo-3761662.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=1'); background-repeat: no-repeat; background-size: cover;">
+	<div class="text-center">
+		<img
+			src="https://images.vexels.com/media/users/3/131778/isolated/preview/2f58b79f41ddd2cf40e188c533a7f751-pizza-logo-template.png"
+			width="300">
+	</div>
+	<div class="text-center mt-1 text-danger">
+		<h2 th:text="${detail.name}"></h2>
 		<h2 th:text="'Prezzo: ' + ${detail.price} + ' EURO'"
-			class="text-uppercase"></h2>
-		<img th:src="${detail.photo}" class="img-detail">
-
-		<div>
-			<a class="text-decoration-none mt-5" th:href="@{/pizzeria}">Torna
-				alla home</a>
-		</div>
-
-		<table th:if="${detail.Discounts.size()>0}" class="table table-dark text-white">
-			<thead>
-
-
-				<tr>
-
-					<td>Id</td>
-					<td>Data Inizio</td>
-					<td>Data Fine</td>
-					<td>Id pizza</td>
-					<td>Titolo</td>
-					<td></td>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="Discount : ${detail.Discounts}" class="text-white">
-					<td th:text="${Discount.id}"></td>
-					<td th:text="${Discount.StartDiscountDate}"></td>
-					<td th:text="${Discount.EndDiscountDate}"></td>
-					<td th:text="${detail.id}"></td>
-					<td th:text="${Discount.Titolo}"></td>
-					<td><a class="btn btn-primary px- mx-2" th:href="@{'/discount/edit/{id}'(id=${Discount.id})}">Modifica offerta</a></td>
-				</tr>
-
+			class="text-uppercase text-danger"></h2>
+			<img th:src="${detail.photo}" class="img-detail rounded-5 border border-dark" width="400">
+			
+			<table th:if="${detail.Discounts.size()>0}" class="table text-white">
+				<thead>
+				
+				
+					<tr>
+					
+						<td>Id</td>
+						<td>Data Inizio</td>
+						<td>Data Fine</td>
+						<td>Tipo di Pizza</td>
+						<td>Titolo</td>
+						<td></td>
+					</tr>
+				</thead>	
+				
+				<tbody>
+					<tr th:each="Discount : ${detail.Discounts}" class="text-white">
+						<td th:text="${Discount.id}"></td>
+						<td th:text="${Discount.StartDiscountDate}"></td>
+						<td th:text="${Discount.EndDiscountDate}"></td>
+						<td th:text="${detail.name}"></td>
+						<td th:text="${Discount.Titolo}"></td>
+						<td><a class="btn btn-primary px- mx-2" th:href="@{'/discount/edit/{id}'(id=${Discount.id})}">Modifica</a></td>
+					</tr>
+				
+		
 
 			</tbody>
 
-
-
-
-
-		</table>
-		
-		<button class="btn-dark btn"><a class="text-decoration-none text-white" th:href="@{'/discount/create?id='+ ${detail.id}}">Crea Nuova offerta</a></button>
-
-
+			</table>
+			
+			<h1>INGREDIENTI:</h1>
+				<div th:each="ingredienties: ${detail.Ingredienties}" >
+					<span th:text="${ingredienties.name}" class="text-white"></span>
+				
+				</div>
+			
+			
+			<button class="btn-danger btn"><a class="text-decoration-none text-white" th:href="@{'/discount/create?id='+ ${detail.id}}">Crea Nuova offerta</a></button>
 	</div>
-
+			<a class="btn btn-danger" th:href="@{/pizzeria}"></i>Torna alla Home</a>
 	<div th:replace="~{fragment :: script}"></div>
 </body>
 </html>
