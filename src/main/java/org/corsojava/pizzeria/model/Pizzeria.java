@@ -38,7 +38,8 @@ public class Pizzeria {
 	private String photo;
 	
 	
-	@OneToMany (mappedBy = "pizzeria") // si riferisce al ManytoOne di pizzeria presente in Discount
+	@OneToMany (mappedBy = "pizzeria")// si riferisce al ManytoOne di pizzeria presente in Discount
+
 	private List<Discount> Discounts;
 	
 	public int getId() {
@@ -86,6 +87,7 @@ public class Pizzeria {
 
 
 	@ManyToMany(cascade = CascadeType.ALL)
+
 	private List<Ingredient> ingredienties;
 	
 	
